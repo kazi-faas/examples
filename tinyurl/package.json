@@ -2,7 +2,9 @@
   "name": "tinyurl",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "deploy": "nx run-many --target=deploy --all"
+  },
   "private": true,
   "dependencies": {},
   "devDependencies": {
