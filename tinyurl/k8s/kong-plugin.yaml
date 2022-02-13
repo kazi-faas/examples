@@ -1,0 +1,30 @@
+# Create a Kong request transformer plugin to rewrite the original host header
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: generate-tinyurl-host-rewrite
+  # The plugin must be created in the same namespace as the ingress.
+  namespace: kong
+plugin: request-transformer
+config:
+  add:
+    headers:
+      - 'Host: generate-tinyurl.default.svc.cluster.local'
+  replace:
+    headers:
+      - 'Host: generate-tinyurl.default.svc.cluster.local'
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: resolve-tinyurl-host-rewrite
+  # The plugin must be created in the same namespace as the ingress.
+  namespace: kong
+plugin: request-transformer
+config:
+  add:
+    headers:
+      - 'Host: resolve-tinyurl.default.svc.cluster.local'
+  replace:
+    headers:
+      - 'Host: resolve-tinyurl.default.svc.cluster.local'

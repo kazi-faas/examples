@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tinyurl-get
+  # The ingress must be created in the same namespace as the kong-proxy service.
+  namespace: kong
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/methods: GET
+    konghq.com/plugins: resolve-tinyurl-host-rewrite
+spec:
+  rules:
+    - host: tinyurl.localhost
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: kong-proxy
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tinyurl-post
+  namespace: kong
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/methods: POST
+    konghq.com/plugins: generate-tinyurl-host-rewrite
+spec:
+  rules:
+    - host: tinyurl.localhost
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: kong-proxy
+                port:
+                  number: 80
