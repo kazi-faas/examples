@@ -1,0 +1,17 @@
+{
+  "name": "resolve-tinyurl",
+  "description": "A function which responds to HTTP requests",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev",
+    "deploy": "kazi deploy"
+  },
+  "dependencies": {
+    "faunadb": "^4.5.2",
+    "micro": "^9.3.4"
+  },
+  "devDependencies": {
+    "micro-dev": "^3.0.0"
+  }
+}
